@@ -1,0 +1,79 @@
+trigger squadcastTrigger on Case (after insert, after update) {
+    string endpoint = 'enter copied webhook';
+    Case obj = Trigger.new[0];
+    string id=obj.Id;
+    string ownerId=obj.OwnerId;
+    boolean isDeleted = obj.IsDeleted;
+    string caseNumber = obj.CaseNumber;
+    string contactId = obj.ContactId;
+    string accountId = obj.AccountId;
+    string assetId = obj.AssetId;
+    string parentId = obj.ParentId;
+    string suppliedName = obj.SuppliedName;
+    string suppliedEmail = obj.SuppliedEmail;
+    string suppliedCompany = obj.SuppliedCompany;
+    string suppliedPhone = obj.SuppliedPhone;
+    string typeOfCase = obj.Type;
+    string status = obj.Status;
+    string reason = obj.Reason;
+    string origin = obj.Origin;
+    string subject = obj.Subject;
+    string description = obj.Description;
+    boolean isClosed = obj.IsClosed;
+    string priority = obj.Priority;
+    datetime closedDate = obj.ClosedDate;
+    boolean isEscalated = obj.IsEscalated;
+    boolean isClosedOnCreate = obj.IsClosedOnCreate;
+    datetime createdDate = obj.CreatedDate;
+    string createdById = obj.CreatedById;
+    datetime lastModifiedDate = obj.LastModifiedDate;
+    string lastModifiedById = obj.LastModifiedById;
+    datetime systemModstamp = obj.SystemModstamp;
+    string contactPhone = obj.ContactPhone;
+    string contactMobile = obj.ContactMobile;
+    string contactEmail = obj.ContactEmail;
+    string contactFax = obj.ContactFax;
+    string engineeringReqNumber = obj.EngineeringReqNumber__c;
+    string product = obj.Product__c;
+    string potentialLiability = obj.PotentialLiability__c;
+
+   string payload= '{'+
+'\"id\" :' + squadcastClass.getPayloadStringByHandlingNull(id)+ ',' +
+'\"ownerId\" :' + squadcastClass.getPayloadStringByHandlingNull(ownerId )+ ',' +
+'\"isDeleted\" :' + squadcastClass.getPayloadStringByHandlingNull(isDeleted)+ ',' +
+'\"caseNumber\" :' + squadcastClass.getPayloadStringByHandlingNull(caseNumber)+ ',' +
+'\"contactId\" :' + squadcastClass.getPayloadStringByHandlingNull(contactId)+ ',' +
+'\"accountId\" :' + squadcastClass.getPayloadStringByHandlingNull(accountId)+ ',' +
+'\"assetId\" :' + squadcastClass.getPayloadStringByHandlingNull(assetId)+ ',' +
+'\"priority\" :' + squadcastClass.getPayloadStringByHandlingNull(priority)+ ',' +
+'\"parentId\" :' + squadcastClass.getPayloadStringByHandlingNull(parentId)+ ',' +
+'\"suppliedName\" :' + squadcastClass.getPayloadStringByHandlingNull(suppliedName)+ ',' +
+'\"suppliedEmail\" :' + squadcastClass.getPayloadStringByHandlingNull(suppliedEmail)+ ',' +
+'\"suppliedCompany\" :' + squadcastClass.getPayloadStringByHandlingNull(suppliedCompany)+ ',' +
+'\"suppliedPhone\" :' + squadcastClass.getPayloadStringByHandlingNull(suppliedPhone)+ ',' +
+'\"typeOfCase\" :' + squadcastClass.getPayloadStringByHandlingNull(typeOfCase)+ ',' +
+'\"status\" :' + squadcastClass.getPayloadStringByHandlingNull(status)+ ',' +
+'\"reason\" :' + squadcastClass.getPayloadStringByHandlingNull(reason)+ ',' +
+'\"origin\" :' + squadcastClass.getPayloadStringByHandlingNull(origin)+ ',' +
+'\"subject\" :' + squadcastClass.getPayloadStringByHandlingNull(subject)+ ',' +
+'\"description\" :' + squadcastClass.getPayloadStringByHandlingNull(description)+ ',' +
+'\"isClosed\" :' + squadcastClass.getPayloadStringByHandlingNull(isClosed)+ ',' +
+'\"closedDate\" :' + squadcastClass.getPayloadStringByHandlingNull(closedDate)+ ',' +
+'\"isEscalated\" :' + squadcastClass.getPayloadStringByHandlingNull(isEscalated)+ ',' +
+'\"isClosedOnCreate\" :' + squadcastClass.getPayloadStringByHandlingNull(isClosedOnCreate)+ ',' +
+'\"createdDate\" :' + squadcastClass.getPayloadStringByHandlingNull(createdDate)+ ',' +
+'\"createdById\" :' + squadcastClass.getPayloadStringByHandlingNull(createdById)+ ',' +
+'\"lastModifiedDate\" :' + squadcastClass.getPayloadStringByHandlingNull(lastModifiedDate)+ ',' +
+'\"systemModstamp\" :' +squadcastClass.getPayloadStringByHandlingNull(systemModstamp)+ ',' +
+'\"contactMobile\" :' + squadcastClass.getPayloadStringByHandlingNull(contactMobile)+ ',' +
+'\"contactEmail\" :' + squadcastClass.getPayloadStringByHandlingNull(contactEmail) + ',' +
+'\"contactFax\" :' + squadcastClass.getPayloadStringByHandlingNull(contactFax)+ ',' +
+'\"engineeringReqNumber\" :' + squadcastClass.getPayloadStringByHandlingNull(engineeringReqNumber)+ ',' +
+'\"product\" :' + squadcastClass.getPayloadStringByHandlingNull(product)+ ',' +
+'\"potentialLiability\" :' + squadcastClass.getPayloadStringByHandlingNull(potentialLiability)+
+'}';
+
+  squadcastClass.xRESTCall(endpoint ,payload);
+
+
+}
